@@ -3,55 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <title>FlowLab</title>
+  <!-- 經典字體：Roboto + Merriweather -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f4f6f8;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0;
+      background: #f9fafb;
+      color: #333;
+      line-height: 1.6;
     }
     header {
-      background: #2d89ef;
+      background: #2563eb;
       color: white;
-      padding: 2rem;
+      padding: 3rem 1rem;
+      text-align: center;
     }
-    h1 {
-      margin: 0;
+    header h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
     }
     section {
-      padding: 2rem;
-    }
-    .tools, .game {
+      max-width: 800px;
       margin: 2rem auto;
-      max-width: 600px;
-      background: white;
       padding: 1.5rem;
+      background: white;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      font-family: 'Merriweather', serif;
+      color: #2563eb;
+      margin-bottom: 1rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to FlowLab</h1>
-    <p>Boost your productivity. Enjoy a secret break.</p>
+    <h1>FlowLab</h1>
+    <p>Boost your productivity with simple, elegant tools.</p>
   </header>
 
-  <section class="tools">
+  <section>
     <h2>Productivity Tools</h2>
-    <p>Here you’ll find simple tools to make your workday smoother.</p>
     <ul>
       <li>📝 Quick Notes</li>
       <li>⏲️ Pomodoro Timer</li>
       <li>📂 Task Organizer</li>
     </ul>
-  </section>
-
-  <section class="game">
-    <h2>Quick Break Game</h2>
-    <p>Take a short break with a fun mini-game.</p>
-    <button onclick="alert('Game coming soon!')">Play Now 🎮</button>
   </section>
 
   <footer>
