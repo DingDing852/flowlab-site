@@ -3,77 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <title>FlowLab</title>
-  <!-- 經典字體：Roboto + Merriweather -->
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- 字體：經典等寬字體 + 現代簡潔字體 -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Roboto Mono', monospace;
       margin: 0;
-      background: #f9fafb;
-      color: #333;
-      line-height: 1.6;
+      background: #e5e5e5; /* 淺灰背景，模仿桌布 */
+      color: #111;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     header {
-      background: #2563eb;
-      color: white;
-      padding: 3rem 1rem;
+      background: #111;
+      color: #f5f5f5;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    .desktop {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      justify-items: center;
+      align-items: start;
+    }
+    .icon {
+      width: 100px;
       text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
     }
-    header h1 {
-      font-family: 'Merriweather', serif;
-      font-size: 2.5rem;
+    .icon:hover {
+      transform: scale(1.05);
+    }
+    .icon img {
+      width: 64px;
+      height: 64px;
       margin-bottom: 0.5rem;
+      filter: grayscale(100%); /* 黑白圖示 */
     }
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-    section {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    h2 {
-      font-family: 'Merriweather', serif;
-      color: #2563eb;
-      margin-bottom: 1rem;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    ul li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #eee;
+    .icon span {
+      display: block;
+      font-size: 0.85rem;
+      color: #222;
+      word-wrap: break-word;
     }
     footer {
+      background: #111;
+      color: #f5f5f5;
       text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #666;
+      padding: 0.5rem;
+      font-size: 0.8rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>FlowLab</h1>
-    <p>Boost your productivity with simple, elegant tools.</p>
+    FlowLab Desktop — Productivity Tools
   </header>
 
-  <section>
-    <h2>Productivity Tools</h2>
-    <ul>
-      <li>📝 Quick Notes</li>
-      <li>⏲️ Pomodoro Timer</li>
-      <li>📂 Task Organizer</li>
-    </ul>
-  </section>
+  <div class="desktop">
+    <div class="icon">
+      <img src="https://img.icons8.com/ios-filled/100/000000/note.png" alt="Notes">
+      <span>Quick Notes</span>
+    </div>
+    <div class="icon">
+      <img src="https://img.icons8.com/ios-filled/100/000000/timer.png" alt="Timer">
+      <span>Pomodoro Timer</span>
+    </div>
+    <div class="icon">
+      <img src="https://img.icons8.com/ios-filled/100/000000/folder-invoices.png" alt="Tasks">
+      <span>Task Organizer</span>
+    </div>
+  </div>
 
   <footer>
-    <p>© 2025 FlowLab</p>
+    © 2025 FlowLab
   </footer>
 </body>
 </html>
