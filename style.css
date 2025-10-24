@@ -17,3 +17,14 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   background: rgba(181, 234, 215, 0.5); /* hover 時顯示薄荷綠，透明度 50% */
 }
+
+.icon img,
+.icon span {
+  opacity: 0.5;              /* 預設 50% 透明 */
+  transition: opacity 0.3s;  /* 平滑過渡 */
+}
+
+.icon:hover img,
+.icon:hover span {
+  opacity: 1;                /* 滑鼠移上去時 100% 顯示 */
+}

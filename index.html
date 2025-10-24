@@ -6,9 +6,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Courier Prime', monospace;
       margin: 0;
-      background: #f9fafb; /* 淺灰背景 */
+      background: #f9fafb;
       color: #222;
       height: 100vh;
       display: flex;
@@ -20,7 +20,6 @@
       padding: 0.8rem 1rem;
       font-size: 0.9rem;
       border-bottom: 1px solid #ddd;
-      text-align: left;
     }
     .desktop {
       flex: 1;
@@ -35,29 +34,24 @@
       width: 100px;
       text-align: center;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
       padding: 0.8rem;
       border-radius: 12px;
+      transition: transform 0.2s;
     }
     .icon:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .icon img {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 0.5rem;
-    }
+    /* 預設 50% 透明 */
+    .icon img,
     .icon span {
-      display: block;
-      font-size: 0.85rem;
-      font-family: 'Roboto Mono', monospace;
-      word-wrap: break-word;
+      opacity: 0.5;
+      transition: opacity 0.3s;
     }
-    /* 粉彩色背景 */
-    .notes { background: #B5EAD7; }     /* 薄荷綠 */
-    .timer { background: #A7C7E7; }     /* 淡藍 */
-    .tasks { background: #FFF3B0; }     /* 柔黃 */
+    /* 滑鼠移上去 → 100% 顯示 */
+    .icon:hover img,
+    .icon:hover span {
+      opacity: 1;
+    }
     footer {
       background: #ffffff;
       color: #666;
@@ -74,15 +68,15 @@
   </header>
 
   <div class="desktop">
-    <div class="icon notes">
+    <div class="icon">
       <img src="https://img.icons8.com/ios-filled/100/000000/note.png" alt="Notes">
       <span>Quick Notes</span>
     </div>
-    <div class="icon timer">
+    <div class="icon">
       <img src="https://img.icons8.com/ios-filled/100/000000/timer.png" alt="Timer">
       <span>Pomodoro Timer</span>
     </div>
-    <div class="icon tasks">
+    <div class="icon">
       <img src="https://img.icons8.com/ios-filled/100/000000/folder-invoices.png" alt="Tasks">
       <span>Task Organizer</span>
     </div>
