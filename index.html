@@ -33,7 +33,14 @@
       <span class="close-btn" id="closeNotes" role="button" aria-label="Close">✕</span>
     </div>
     <div class="window-body">
-      <textarea id="notesArea" placeholder="Write your notes here..."></textarea>
+      <!-- 聊天訊息區（在上方累積顯示） -->
+      <div class="chat-messages" id="chatMessages"></div>
+
+      <!-- 記事本 textarea + 透明 Enter 按鈕 -->
+      <div class="textarea-wrap">
+        <textarea id="notesArea" placeholder="Write your notes here..."></textarea>
+        <button id="enterBtn" class="enter-btn" aria-label="Send">Enter</button>
+      </div>
     </div>
   </div>
 
@@ -41,7 +48,6 @@
     © 2025 FlowLab
   </footer>
 
-  <!-- 只引入一次 notes.js，避免重複事件綁定 -->
   <script src="notes.js"></script>
 </body>
 </html>
