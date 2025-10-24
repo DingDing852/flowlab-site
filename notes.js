@@ -3,7 +3,7 @@ const notesWindow = document.getElementById('notesWindow');
 const closeNotes = document.getElementById('closeNotes');
 const notesArea = document.getElementById('notesArea');
 
-// 打開視窗
+// 打開視窗（只有點擊 icon 才會觸發）
 notesIcon.addEventListener('click', () => {
   notesWindow.style.display = 'flex';
   notesArea.value = localStorage.getItem('quickNotes') || '';
