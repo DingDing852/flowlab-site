@@ -1,30 +1,88 @@
 body {
   font-family: 'Courier Prime', monospace;
+  margin: 0;
+  background: #f9fafb;
+  color: #222;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-
+header, footer {
+  background: #ffffff;
+  color: #333;
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #ddd;
+}
+footer {
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 0.8rem;
+}
+.desktop {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
+  align-items: start;
+}
 .icon {
   width: 100px;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
   padding: 0.8rem;
   border-radius: 12px;
-  background: transparent; /* 預設透明 */
+  transition: transform 0.2s;
+}
+.icon:hover { transform: translateY(-3px); }
+.icon img, .icon span {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.icon:hover img, .icon:hover span {
+  opacity: 1;
 }
 
-.icon:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background: rgba(181, 234, 215, 0.5); /* hover 時顯示薄荷綠，透明度 50% */
+/* Quick Notes 視窗 */
+.window {
+  display: none;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
 }
-
-.icon img,
-.icon span {
-  opacity: 0.5;              /* 預設 50% 透明 */
-  transition: opacity 0.3s;  /* 平滑過渡 */
+.window-header {
+  background: #f0f0f0;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
 }
-
-.icon:hover img,
-.icon:hover span {
-  opacity: 1;                /* 滑鼠移上去時 100% 顯示 */
+.close-btn {
+  cursor: pointer;
+  font-weight: bold;
+  color: #666;
+}
+.close-btn:hover { color: #000; }
+.window-body {
+  padding: 1rem;
+}
+textarea {
+  width: 100%;
+  height: 200px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
 }
