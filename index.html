@@ -31,12 +31,13 @@
     <div class="window-header">
       <span>Quick Notes</span>
       <span class="close-btn" id="closeNotes" role="button" aria-label="Close">✕</span>
+      <button id="manageBtn">管理</button>
     </div>
     <div class="window-body">
-      <!-- 聊天訊息區（在上方累積顯示） -->
+      <!-- 聊天訊息區 -->
       <div class="chat-messages" id="chatMessages"></div>
 
-      <!-- 記事本 textarea + 透明 Enter 按鈕 -->
+      <!-- 輸入區 -->
       <div class="textarea-wrap">
         <textarea id="notesArea" placeholder="Write your notes here..."></textarea>
         <button id="enterBtn" class="enter-btn" aria-label="Send">Enter</button>
