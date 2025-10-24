@@ -1,0 +1,19 @@
+body {
+  font-family: 'Courier Prime', monospace;
+}
+
+.icon {
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+  padding: 0.8rem;
+  border-radius: 12px;
+  background: transparent; /* 預設透明 */
+}
+
+.icon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: rgba(181, 234, 215, 0.5); /* hover 時顯示薄荷綠，透明度 50% */
+}
