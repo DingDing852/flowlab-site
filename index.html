@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>FlowLab</title>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -13,24 +13,24 @@
 
   <div class="desktop">
     <div class="icon" id="notesIcon">
-      <img src="https://img.icons8.com/ios-filled/100/000000/note.png" alt="Notes">
+      <img src="https://img.icons8.com/ios-filled/100/000000/note.png" alt="Notes" />
       <span>Quick Notes</span>
     </div>
     <div class="icon" id="timerIcon">
-      <img src="https://img.icons8.com/ios-filled/100/000000/timer.png" alt="Timer">
+      <img src="https://img.icons8.com/ios-filled/100/000000/timer.png" alt="Timer" />
       <span>Pomodoro Timer</span>
     </div>
     <div class="icon" id="tasksIcon">
-      <img src="https://img.icons8.com/ios-filled/100/000000/folder-invoices.png" alt="Tasks">
+      <img src="https://img.icons8.com/ios-filled/100/000000/folder-invoices.png" alt="Tasks" />
       <span>Task Organizer</span>
     </div>
   </div>
 
   <!-- Quick Notes 視窗 -->
-  <div class="window" id="notesWindow">
+  <div class="window" id="notesWindow" aria-hidden="true">
     <div class="window-header">
       <span>Quick Notes</span>
-      <span class="close-btn" id="closeNotes">✕</span>
+      <span class="close-btn" id="closeNotes" role="button" aria-label="Close">✕</span>
     </div>
     <div class="window-body">
       <textarea id="notesArea" placeholder="Write your notes here..."></textarea>
@@ -41,6 +41,7 @@
     © 2025 FlowLab
   </footer>
 
+  <!-- 只引入一次 notes.js，避免重複事件綁定 -->
   <script src="notes.js"></script>
 </body>
 </html>

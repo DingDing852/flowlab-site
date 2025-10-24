@@ -41,6 +41,7 @@ footer {
   transition: transform 0.2s;
 }
 .icon:hover { transform: translateY(-3px); }
+
 .icon img, .icon span {
   opacity: 0.5;
   transition: opacity 0.3s;
@@ -51,7 +52,7 @@ footer {
 
 /* Quick Notes 視窗 */
 .window {
-  display: none;
+  display: none; /* 預設隱藏，避免自動彈出 */
   position: fixed;
   top: 50%; 
   left: 50%;
