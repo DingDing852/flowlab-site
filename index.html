@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>FlowLab</title>
-  <!-- 字體：Roboto Mono + Roboto -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
-      background: #f5f7fa; /* 淺灰藍，清新 */
+      background: #f9fafb; /* 淺灰背景 */
       color: #222;
       height: 100vh;
       display: flex;
@@ -36,26 +35,29 @@
       width: 100px;
       text-align: center;
       cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-      padding: 0.5rem;
-      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      padding: 0.8rem;
+      border-radius: 12px;
     }
     .icon:hover {
       transform: translateY(-3px);
-      background: #e6f4ea; /* 淡綠 hover，輕鬆感 */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .icon img {
       width: 64px;
       height: 64px;
       margin-bottom: 0.5rem;
-      filter: grayscale(40%); /* 保持簡潔，但不是全黑白 */
     }
     .icon span {
       display: block;
       font-size: 0.85rem;
-      color: #333;
+      font-family: 'Roboto Mono', monospace;
       word-wrap: break-word;
     }
+    /* 粉彩色背景 */
+    .notes { background: #B5EAD7; }     /* 薄荷綠 */
+    .timer { background: #A7C7E7; }     /* 淡藍 */
+    .tasks { background: #FFF3B0; }     /* 柔黃 */
     footer {
       background: #ffffff;
       color: #666;
@@ -72,15 +74,15 @@
   </header>
 
   <div class="desktop">
-    <div class="icon">
+    <div class="icon notes">
       <img src="https://img.icons8.com/ios-filled/100/000000/note.png" alt="Notes">
       <span>Quick Notes</span>
     </div>
-    <div class="icon">
+    <div class="icon timer">
       <img src="https://img.icons8.com/ios-filled/100/000000/timer.png" alt="Timer">
       <span>Pomodoro Timer</span>
     </div>
-    <div class="icon">
+    <div class="icon tasks">
       <img src="https://img.icons8.com/ios-filled/100/000000/folder-invoices.png" alt="Tasks">
       <span>Task Organizer</span>
     </div>
