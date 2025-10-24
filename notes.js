@@ -5,10 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatMessages = document.getElementById('chatMessages');
   const notesArea = document.getElementById('notesArea');
   const enterBtn = document.getElementById('enterBtn');
-  const manageBtn = document.getElementById('manageBtn');
 
-  let isManaging = false; // 管理模式開關
-
+  // 載入訊息
   function loadMessages() {
     const saved = JSON.parse(localStorage.getItem('quickNotesChat')) || [];
     chatMessages.innerHTML = '';
@@ -16,60 +14,46 @@ document.addEventListener('DOMContentLoaded', () => {
     saved.forEach((text, index) => {
       const div = document.createElement('div');
       div.className = 'chat-message';
+      div.textContent = text;
 
-      if (isManaging) {
-        // 管理模式：輸入框 + 刪除按鈕
-        div.classList.add('editing');
+      // 點擊訊息 → 進入編輯模式
+      div.addEventListener('click', () => {
+        // 避免重複建立輸入框
+        if (div.querySelector('input')) return;
 
         const input = document.createElement('input');
+        input.type = 'text';
         input.value = text;
-
-        const delBtn = document.createElement('button');
-        delBtn.className = 'delete-btn';
-        delBtn.textContent = '刪除';
-        delBtn.addEventListener('click', () => {
-          saved.splice(index, 1);
-          localStorage.setItem('quickNotesChat', JSON.stringify(saved));
-          loadMessages();
-        });
-
+        div.innerHTML = '';
         div.appendChild(input);
-        div.appendChild(delBtn);
-      } else {
-        // 平常模式：純文字
-        div.textContent = text;
-      }
+        input.focus();
+
+        // 保存邏輯
+        function save() {
+          const val = input.value.trim();
+          const msgs = JSON.parse(localStorage.getItem('quickNotesChat')) || [];
+          if (val) {
+            msgs[index] = val;
+          } else {
+            msgs.splice(index, 1); // 空白 → 刪除
+          }
+          localStorage.setItem('quickNotesChat', JSON.stringify(msgs));
+          loadMessages();
+        }
+
+        input.addEventListener('blur', save);
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            save();
+          }
+        });
+      });
 
       chatMessages.appendChild(div);
     });
 
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
-
-  function saveMessages() {
-    const inputs = chatMessages.querySelectorAll('input');
-    const newMessages = [];
-    inputs.forEach(input => {
-      const val = input.value.trim();
-      if (val) newMessages.push(val); // 空白則刪除
-    });
-    localStorage.setItem('quickNotesChat', JSON.stringify(newMessages));
-  }
-
-  // 管理模式切換
-  manageBtn.addEventListener('click', () => {
-    if (isManaging) {
-      // 離開管理模式 → 保存
-      saveMessages();
-      isManaging = false;
-      manageBtn.textContent = '管理';
-    } else {
-      // 進入管理模式
-      isManaging = true;
-      manageBtn.textContent = '完成';
-    }
-    loadMessages();
-  });
 
   // 開關視窗
   notesIcon.addEventListener('click', () => {
