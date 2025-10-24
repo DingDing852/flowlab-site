@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>FlowLab</title>
-  <!-- 字體：經典等寬字體 + 現代簡潔字體 -->
+  <!-- 字體：Roboto Mono + Roboto -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
-      background: #e5e5e5; /* 淺灰背景，模仿桌布 */
-      color: #111;
+      background: #f5f7fa; /* 淺灰藍，清新 */
+      color: #222;
       height: 100vh;
       display: flex;
       flex-direction: column;
     }
     header {
-      background: #111;
-      color: #f5f5f5;
-      padding: 0.5rem 1rem;
+      background: #ffffff;
+      color: #333;
+      padding: 0.8rem 1rem;
       font-size: 0.9rem;
+      border-bottom: 1px solid #ddd;
       text-align: left;
     }
     .desktop {
@@ -35,29 +36,33 @@
       width: 100px;
       text-align: center;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.2s;
+      padding: 0.5rem;
+      border-radius: 8px;
     }
     .icon:hover {
-      transform: scale(1.05);
+      transform: translateY(-3px);
+      background: #e6f4ea; /* 淡綠 hover，輕鬆感 */
     }
     .icon img {
       width: 64px;
       height: 64px;
       margin-bottom: 0.5rem;
-      filter: grayscale(100%); /* 黑白圖示 */
+      filter: grayscale(40%); /* 保持簡潔，但不是全黑白 */
     }
     .icon span {
       display: block;
       font-size: 0.85rem;
-      color: #222;
+      color: #333;
       word-wrap: break-word;
     }
     footer {
-      background: #111;
-      color: #f5f5f5;
+      background: #ffffff;
+      color: #666;
       text-align: center;
       padding: 0.5rem;
       font-size: 0.8rem;
+      border-top: 1px solid #ddd;
     }
   </style>
 </head>
