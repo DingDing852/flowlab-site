@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isManaging = false; // 管理模式開關
 
-  // 載入訊息
   function loadMessages() {
     const saved = JSON.parse(localStorage.getItem('quickNotesChat')) || [];
     chatMessages.innerHTML = '';
+
     saved.forEach((text, index) => {
       const div = document.createElement('div');
       div.className = 'chat-message';
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isManaging) {
         // 管理模式：輸入框 + 刪除按鈕
         div.classList.add('editing');
+
         const input = document.createElement('input');
         input.value = text;
 
@@ -41,10 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       chatMessages.appendChild(div);
     });
+
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
-  // 保存管理模式下的修改
   function saveMessages() {
     const inputs = chatMessages.querySelectorAll('input');
     const newMessages = [];
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('quickNotesChat', JSON.stringify(newMessages));
   }
 
-  // 開關管理模式
+  // 管理模式切換
   manageBtn.addEventListener('click', () => {
     if (isManaging) {
       // 離開管理模式 → 保存
