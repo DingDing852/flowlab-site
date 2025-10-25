@@ -1,6 +1,10 @@
-/* 全局設定 */
-body {
+/* 全域字體與基礎設定 */
+* {
   font-family: 'Courier Prime', monospace;
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
   background: #f9fafb;
   color: #222;
@@ -52,13 +56,11 @@ footer {
   opacity: 1;
 }
 
-/* Quick Notes 視窗 */
+/* 視窗基礎樣式 */
 .window {
-  display: none;
-  position: fixed;
-  top: 50%; 
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute; /* 改成 absolute，方便自由移動 */
+  top: 100px;         /* 預設位置 */
+  left: 100px;
   width: 420px;
   max-width: 90%;
   max-height: 80%;
@@ -78,8 +80,8 @@ footer {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ccc;
+  cursor: move; /* 提示使用者可以拖曳 */
 }
-
 .window-title {
   font-weight: 600;
 }
@@ -88,19 +90,6 @@ footer {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.manage-btn {
-  font-size: 0.8rem;
-  cursor: pointer;
-  border: none;
-  background: #333;
-  color: #fff;
-  border-radius: 4px;
-  padding: 0.2rem 0.6rem;
-}
-.manage-btn:hover {
-  background: #555;
 }
 
 .close-btn {
@@ -117,20 +106,19 @@ footer {
   overflow: hidden;
 }
 
-/* 訊息區 */
+/* Quick Notes 區域 */
 .chat-messages {
   height: 180px;
   padding: 0.8rem 1rem;
   overflow-y: auto;
   border-bottom: 1px solid #e5e5e5;
   background: #fff;
-  box-sizing: border-box;
 }
 
 .chat-message {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0.5rem 0.8rem;
   font-size: 0.9rem;
   line-height: 1.4;
@@ -141,7 +129,14 @@ footer {
   border-bottom: none;
 }
 
-/* 刪除按鈕（紅色交叉） */
+.chat-message div {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 120px;
+  overflow-y: auto;
+  flex: 1;
+}
+
 .delete-btn {
   background: none;
   border: none;
@@ -155,7 +150,6 @@ footer {
   opacity: 1;
 }
 
-/* 輸入區 */
 .textarea-wrap {
   position: relative;
   padding: 0.8rem 1rem;
@@ -164,23 +158,21 @@ footer {
 
 textarea {
   width: 100%;
-  height: 180px;
-  font-family: 'Courier Prime', monospace;
+  min-height: 60px;
+  max-height: 300px;
   font-size: 0.9rem;
   padding: 0.6rem 0.8rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   resize: none;
-  box-sizing: border-box;
+  overflow-y: auto;
 }
 
-/* Enter 按鈕 */
 .enter-btn {
   position: absolute;
   right: 1.4rem;
   bottom: 1.2rem;
   padding: 0.35rem 0.8rem;
-  font-family: 'Courier Prime', monospace;
   font-size: 0.85rem;
   border: none;
   border-radius: 16px;
@@ -194,4 +186,146 @@ textarea {
 }
 .enter-btn:active {
   transform: scale(0.98);
+}
+/* Timer 區域 */
+.timer-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #0d1b2a; /* 深藍灰背景 */
+  color: #fff;
+  border-radius: 8px;
+}
+
+#timerDisplay {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.time-block {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-part {
+  font-size: 3rem;
+  font-weight: bold;
+  min-width: 42px;
+  text-align: center;
+  color: #fff;
+  outline: none;
+  caret-color: #1e90ff;
+  cursor: pointer;
+}
+
+.sep {
+  font-size: 3rem;
+  color: #fff;
+}
+
+/* 箭頭絕對定位，不撐大視窗 */
+.arrow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4rem;   /* 放大箭頭 */
+  font-weight: bold;
+  color: #ccc;
+  cursor: pointer;
+  user-select: none;
+  display: none;
+  line-height: 1;
+}
+.arrow.up { top: -1.6rem; }
+.arrow.down { bottom: -1.6rem; }
+
+.time-block.editing .arrow {
+  display: block;
+}
+.arrow:hover { color: #1e90ff; }
+
+/* 快速加時按鈕 */
+.quick-add {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.quick-add button {
+  background: #1b263b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quick-add button:hover {
+  background: #415a77;
+}
+
+/* 控制按鈕（Clear 與 Start/Reset 同排） */
+.main-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center; /* 讓按鈕垂直對齊 */
+}
+
+.main-controls button {
+  min-width: 100px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.start-btn {
+  background: #0078d7;
+  color: #fff;
+  border: none;
+}
+.start-btn:hover {
+  background: #005a9e;
+}
+
+.reset-btn {
+  background: #555;
+  color: #fff;
+  border: none;
+}
+.reset-btn:hover {
+  background: #777;
+}
+
+.clear-btn {
+  background: #a00;
+  color: #fff;
+  border: none;
+}
+.clear-btn:hover {
+  background: #d33;
+}
+
+/* 時間到特效 */
+@keyframes flash {
+  0%, 100% { color: #fff; }
+  50% { color: #ff4444; }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.time-up {
+  animation: flash 0.5s alternate 6, shake 0.5s ease-in-out 3;
 }

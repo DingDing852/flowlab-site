@@ -5,6 +5,13 @@
   <title>FlowLab</title>
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 預設隱藏所有視窗 */
+    #notesWindow,
+    #timerWindow {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -12,14 +19,19 @@
   </header>
 
   <div class="desktop">
+    <!-- Quick Notes 圖示 -->
     <div class="icon" id="notesIcon">
       <img src="https://img.icons8.com/ios-filled/100/000000/note.png" alt="Notes" />
       <span>Quick Notes</span>
     </div>
+
+    <!-- Timer 圖示 -->
     <div class="icon" id="timerIcon">
       <img src="https://img.icons8.com/ios-filled/100/000000/timer.png" alt="Timer" />
-      <span>Pomodoro Timer</span>
+      <span>Custom Timer</span>
     </div>
+
+    <!-- Task Organizer 圖示（暫未實作） -->
     <div class="icon" id="tasksIcon">
       <img src="https://img.icons8.com/ios-filled/100/000000/folder-invoices.png" alt="Tasks" />
       <span>Task Organizer</span>
@@ -29,11 +41,11 @@
   <!-- Quick Notes 視窗 -->
   <div class="window" id="notesWindow" aria-hidden="true">
     <div class="window-header">
-    <span class="window-title">Quick Notes</span>
-    <div class="header-actions">
-        <button id="manageBtn" class="manage-btn">管理</button>
+      <span class="window-title">Quick Notes</span>
+      <div class="header-actions">
+        <button id="editBtn" class="edit-btn">Edit</button>
         <span class="close-btn" id="closeNotes" role="button" aria-label="Close">✕</span>
-    </div>
+      </div>
     </div>
     <div class="window-body">
       <!-- 聊天訊息區 -->
@@ -47,10 +59,58 @@
     </div>
   </div>
 
+  <!-- Timer 視窗 -->
+  <div class="window" id="timerWindow" aria-hidden="true">
+    <div class="window-header">
+      <span class="window-title">計時器</span>
+      <div class="header-actions">
+        <span class="close-btn" id="closeTimer" role="button" aria-label="Close">✕</span>
+      </div>
+    </div>
+    <div class="window-body timer-body">
+      <!-- 時間顯示（點擊才會出現上下三角形） -->
+<div id="timerDisplay" class="editable-time">
+  <div class="time-block" data-part="hours">
+    <div class="arrow up">▲</div>
+    <span class="time-part" contenteditable="true">00</span>
+    <div class="arrow down">▼</div>
+  </div>
+  <span class="sep">:</span>
+  <div class="time-block" data-part="minutes">
+    <div class="arrow up">▲</div>
+    <span class="time-part" contenteditable="true">05</span>
+    <div class="arrow down">▼</div>
+  </div>
+  <span class="sep">:</span>
+  <div class="time-block" data-part="seconds">
+    <div class="arrow up">▲</div>
+    <span class="time-part" contenteditable="true">00</span>
+    <div class="arrow down">▼</div>
+  </div>
+</div>
+      <!-- 快速加時按鈕 -->
+      <div class="quick-add">
+        <button data-add="30">+0:30</button>
+        <button data-add="60">+1:00</button>
+        <button data-add="300">+5:00</button>
+      </div>
+
+      <!-- 控制按鈕 -->
+      <div class="main-controls">
+        <button id="startPauseBtn" class="start-btn">▶ Start</button>
+        <button id="resetBtn" class="reset-btn">⟲ Reset</button>
+        <button id="clearBtn" class="clear-btn">⨉ Clear</button>
+      </div>
+    </div>
+  </div>
+
   <footer>
     © 2025 FlowLab
   </footer>
 
+  <!-- 各功能的 JS -->
   <script src="notes.js"></script>
+  <script src="timer.js"></script>
+  <script src="drag.js"></script>
 </body>
 </html>

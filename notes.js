@@ -5,15 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatMessages = document.getElementById('chatMessages');
   const notesArea = document.getElementById('notesArea');
   const enterBtn = document.getElementById('enterBtn');
-  const manageBtn = document.getElementById('manageBtn');
+  const editBtn = document.getElementById('editBtn');
 
-  let isManaging = false; // 管理模式開關
-  let windowOpen = false; // 防止自動彈出
+  let isEditing = false;   // 是否處於編輯模式
+  let windowOpen = false;  // 視窗是否已開啟
 
-  // 初始強制隱藏
-  notesWindow.style.display = 'none';
-  notesWindow.setAttribute('aria-hidden', 'true');
+  // 自動調整 textarea 高度
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 300) + 'px';
+  }
 
+  // 載入訊息
   function loadMessages() {
     const saved = JSON.parse(localStorage.getItem('quickNotesChat')) || [];
     chatMessages.innerHTML = '';
@@ -22,13 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const div = document.createElement('div');
       div.className = 'chat-message';
 
-      const span = document.createElement('span');
-      span.textContent = text;
+      const textDiv = document.createElement('div');
+      textDiv.textContent = text;
+      textDiv.style.whiteSpace = 'pre-wrap';
+      textDiv.style.wordBreak = 'break-word';
+      textDiv.style.maxHeight = '120px';
+      textDiv.style.overflowY = 'auto';
+      div.appendChild(textDiv);
 
-      div.appendChild(span);
-
-      if (isManaging) {
-        // 管理模式下才顯示刪除鍵 + 點擊編輯
+      if (isEditing) {
+        // 刪除按鈕
         const delBtn = document.createElement('button');
         delBtn.className = 'delete-btn';
         delBtn.textContent = '✕';
@@ -42,17 +48,24 @@ document.addEventListener('DOMContentLoaded', () => {
         div.appendChild(delBtn);
 
         // 點擊文字 → 編輯
-        span.addEventListener('click', () => {
-          if (div.querySelector('input')) return;
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.value = text;
+        textDiv.addEventListener('click', () => {
+          if (div.querySelector('textarea')) return;
+
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.style.width = '100%';
+          textarea.style.minHeight = '24px';
+          textarea.style.maxHeight = '300px';
+          textarea.style.overflowY = 'auto';
+          textarea.style.resize = 'none';
+
           div.innerHTML = '';
-          div.appendChild(input);
-          input.focus();
+          div.appendChild(textarea);
+          autoResize(textarea);
+          textarea.focus();
 
           function save() {
-            const val = input.value.trim();
+            const val = textarea.value.trim();
             const msgs = JSON.parse(localStorage.getItem('quickNotesChat')) || [];
             if (val) {
               msgs[index] = val;
@@ -63,9 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
             loadMessages();
           }
 
-          input.addEventListener('blur', save);
-          input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+          textarea.addEventListener('input', () => autoResize(textarea));
+          textarea.addEventListener('blur', save);
+          textarea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault();
               save();
             }
@@ -79,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
-  // 管理模式切換
-  manageBtn.addEventListener('click', () => {
-    isManaging = !isManaging;
-    manageBtn.textContent = isManaging ? '完成' : '管理';
+  // 切換 Edit / Finish 模式
+  editBtn.addEventListener('click', () => {
+    isEditing = !isEditing;
+    editBtn.textContent = isEditing ? 'Finish' : 'Edit';
     loadMessages();
   });
 
@@ -100,6 +114,13 @@ document.addEventListener('DOMContentLoaded', () => {
     windowOpen = false;
     notesWindow.style.display = 'none';
     notesWindow.setAttribute('aria-hidden', 'true');
+
+    // 如果在編輯模式下關閉 → 自動恢復成一般模式
+    if (isEditing) {
+      isEditing = false;
+      editBtn.textContent = 'Edit';
+      loadMessages();
+    }
   });
 
   // 新增訊息
@@ -131,6 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
       windowOpen = false;
       notesWindow.style.display = 'none';
       notesWindow.setAttribute('aria-hidden', 'true');
+
+      if (isEditing) {
+        isEditing = false;
+        editBtn.textContent = 'Edit';
+        loadMessages();
+      }
     }
   });
 });
