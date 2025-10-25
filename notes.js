@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const manageBtn = document.getElementById('manageBtn');
 
   let isManaging = false; // 管理模式開關
+  let windowOpen = false; // 防止自動彈出
+
+  // 初始強制隱藏
+  notesWindow.style.display = 'none';
+  notesWindow.setAttribute('aria-hidden', 'true');
 
   function loadMessages() {
     const saved = JSON.parse(localStorage.getItem('quickNotesChat')) || [];
@@ -16,13 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
     saved.forEach((text, index) => {
       const div = document.createElement('div');
       div.className = 'chat-message';
-      div.textContent = text;
 
-      // 只有在管理模式下才允許點擊編輯
+      const span = document.createElement('span');
+      span.textContent = text;
+
+      div.appendChild(span);
+
       if (isManaging) {
-        div.addEventListener('click', () => {
-          if (div.querySelector('input')) return; // 避免重複建立輸入框
+        // 管理模式下才顯示刪除鍵 + 點擊編輯
+        const delBtn = document.createElement('button');
+        delBtn.className = 'delete-btn';
+        delBtn.textContent = '✕';
+        delBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const msgs = JSON.parse(localStorage.getItem('quickNotesChat')) || [];
+          msgs.splice(index, 1);
+          localStorage.setItem('quickNotesChat', JSON.stringify(msgs));
+          loadMessages();
+        });
+        div.appendChild(delBtn);
 
+        // 點擊文字 → 編輯
+        span.addEventListener('click', () => {
+          if (div.querySelector('input')) return;
           const input = document.createElement('input');
           input.type = 'text';
           input.value = text;
@@ -36,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (val) {
               msgs[index] = val;
             } else {
-              msgs.splice(index, 1); // 空白 → 刪除
+              msgs.splice(index, 1);
             }
             localStorage.setItem('quickNotesChat', JSON.stringify(msgs));
             loadMessages();
@@ -65,13 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMessages();
   });
 
-  // 開關視窗
+  // 開窗
   notesIcon.addEventListener('click', () => {
+    if (windowOpen) return;
+    windowOpen = true;
     notesWindow.style.display = 'flex';
+    notesWindow.setAttribute('aria-hidden', 'false');
     loadMessages();
   });
+
+  // 關窗
   closeNotes.addEventListener('click', () => {
+    windowOpen = false;
     notesWindow.style.display = 'none';
+    notesWindow.setAttribute('aria-hidden', 'true');
   });
 
   // 新增訊息
@@ -94,6 +122,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
       enterBtn.click();
+    }
+  });
+
+  // Esc 關窗
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && windowOpen) {
+      windowOpen = false;
+      notesWindow.style.display = 'none';
+      notesWindow.setAttribute('aria-hidden', 'true');
     }
   });
 });

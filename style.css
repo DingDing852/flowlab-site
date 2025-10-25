@@ -1,3 +1,4 @@
+/* 全局設定 */
 body {
   font-family: 'Courier Prime', monospace;
   margin: 0;
@@ -22,6 +23,7 @@ footer {
   font-size: 0.8rem;
 }
 
+/* 桌面圖示區 */
 .desktop {
   flex: 1;
   display: grid;
@@ -85,7 +87,7 @@ footer {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* 管理 和 ✕ 之間的距離 */
+  gap: 0.5rem;
 }
 
 .manage-btn {
@@ -98,20 +100,6 @@ footer {
   padding: 0.2rem 0.6rem;
 }
 .manage-btn:hover {
-  background: #555;
-}
-
-.window-header button {
-  margin-left: 1rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  border: none;
-  background: #333;
-  color: #fff;
-  border-radius: 4px;
-  padding: 0.2rem 0.6rem;
-}
-.window-header button:hover {
   background: #555;
 }
 
@@ -129,7 +117,7 @@ footer {
   overflow: hidden;
 }
 
-/* 聊天訊息區 */
+/* 訊息區 */
 .chat-messages {
   height: 180px;
   padding: 0.8rem 1rem;
@@ -140,48 +128,34 @@ footer {
 }
 
 .chat-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 0.8rem;
   font-size: 0.9rem;
   line-height: 1.4;
   color: #222;
-  word-break: break-word;
   border-bottom: 1px solid #eee;
-  position: relative;
 }
 .chat-message:last-child {
   border-bottom: none;
 }
 
-/* 管理模式下的輸入框 */
-.chat-message.editing {
-  display: flex;
-  flex-direction: column;
-}
-.chat-message input {
-  width: 100%;
-  font-family: 'Courier Prime', monospace;
-  font-size: 0.9rem;
-  padding: 0.4rem 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 0.3rem;
-  box-sizing: border-box;
-}
-
+/* 刪除按鈕（紅色交叉） */
 .delete-btn {
-  align-self: flex-end;
-  font-size: 0.75rem;
   background: none;
   border: none;
   color: #c00;
+  font-weight: bold;
   cursor: pointer;
+  margin-left: 0.5rem;
   opacity: 0.7;
 }
 .delete-btn:hover {
   opacity: 1;
 }
 
-/* textarea 區域 */
+/* 輸入區 */
 .textarea-wrap {
   position: relative;
   padding: 0.8rem 1rem;
